@@ -1,6 +1,7 @@
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 int ChangeMaxNumber();
@@ -64,13 +65,22 @@ void MainMenu(){
 
 // write functions for guessing
 void PlayMatch(int maxNumber){
+  char converter;
   int input;
   int correctNumber = (rand() % maxNumber) + 1;
 
   while (1){
     printf("Guess a number (Current max is %d):\n", maxNumber);
 
-    scanf("%d", &input);
+    scanf("%s", &converter);
+
+    if (strcmp(&converter, "q") == 0){
+      printf("The correct answer was %d\n", correctNumber);
+
+      return;
+    }
+
+    input = atoi(&converter);
     
     if (input > correctNumber){
       printf("Lower\n");
