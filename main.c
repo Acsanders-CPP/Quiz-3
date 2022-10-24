@@ -1,9 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void MainMenu();
 void PlayMatch();
 
 int main(void) {
+  srand(time(0));
+  
   MainMenu();
   
   return 0;
@@ -24,6 +28,10 @@ void MainMenu(){
   switch (input){
     case 1:
       PlayMatch();
+      break;
+    default:
+      printf("Invalid input\n");
+      break;
   }
 }
 
