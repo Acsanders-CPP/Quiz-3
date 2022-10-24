@@ -65,22 +65,22 @@ void MainMenu(){
 
 // write functions for guessing
 void PlayMatch(int maxNumber){
-  char converter;
+  char converter[100000];
   int input;
   int correctNumber = (rand() % maxNumber) + 1;
 
   while (1){
     printf("Guess a number (Current max is %d):\n", maxNumber);
 
-    scanf("%s", &converter);
+    scanf("%s", converter);
 
-    if (strcmp(&converter, "q") == 0){
+    if (strcmp(converter, "q") == 0){
       printf("The correct answer was %d\n", correctNumber);
 
       return;
     }
 
-    input = atoi(&converter);
+    input = atoi(converter);
     
     if (input > correctNumber){
       printf("Lower\n");
