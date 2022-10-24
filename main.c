@@ -34,9 +34,21 @@ void MainMenu(){
   int input = 0;
   int maxNumber = 10;
 
+  FILE *file;
+
+  char buffer[100000];
 
   while (1){
     input = 0;
+
+    if ((file = fopen("MaxNumber.txt", "r"))){
+      
+      while (fscanf(file, "%s", buffer) == 1){
+        maxNumber = atoi(buffer);
+      }
+
+      fclose(file);
+    }
     
     // make menu
     printf("-------------------------\nGuessing Game\n\n1.) Play Game\n2.) Change Max Number\n3.) Exit\n-------------------------\n");
@@ -60,27 +72,35 @@ void MainMenu(){
         printf("Invalid input\n");
         break;
     }
+
+    char numberConvert[100000];
+
+    snprintf(numberConvert, 100, "%d", maxNumber);
+
+    file = fopen("MaxNumber.txt", "w+");
+    fprintf(file, numberConvert);
+    fclose(file);
   }
 }
 
 // write functions for guessing
 void PlayMatch(int maxNumber){
-  char converter;
+  char converter[100000];
   int input;
   int correctNumber = (rand() % maxNumber) + 1;
 
   while (1){
     printf("Guess a number (Current max is %d):\n", maxNumber);
 
-    scanf("%s", &converter);
+    scanf("%s", converter);
 
-    if (strcmp(&converter, "q") == 0){
+    if (strcmp(converter, "q") == 0){
       printf("The correct answer was %d\n", correctNumber);
 
       return;
     }
 
-    input = atoi(&converter);
+    input = atoi(converter);
     
     if (input > correctNumber){
       printf("Lower\n");
