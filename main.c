@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-void MainMenu();
-void PlayMatch();
+void MainMenu(int maxNumber);
+void PlayMatch(int maxNumber);
 
 int main(void) {
   srand(time(0));
@@ -15,6 +15,7 @@ int main(void) {
 
 void MainMenu(){
   int input = 0;
+  int maxNumber = 10;
   
   // make menu
   printf("-------------------------\nGuessing Game\n\n1.) Play Game\n2.) Change Max Number\n3.) Exit\n-------------------------\n");
@@ -27,7 +28,7 @@ void MainMenu(){
 
   switch (input){
     case 1:
-      PlayMatch();
+      PlayMatch(maxNumber);
       break;
     default:
       printf("Invalid input\n");
@@ -36,13 +37,18 @@ void MainMenu(){
 }
 
 // write functions for guessing
-void PlayMatch(){
+void PlayMatch(int maxNumber){
   int input;
+  int correctNumber = (rand() % maxNumber) + 1;
   
-  printf("Guess a number:\n");
+  printf("Guess a number (Current max is %d):\n", maxNumber);
 
   scanf("%d", &input);
 
-  if (input ==)
+  if (input == correctNumber){
+    printf("You win\n");
+
+    return;
+  }
 }
 //return to main menu
