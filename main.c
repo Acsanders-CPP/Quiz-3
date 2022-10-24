@@ -1,7 +1,9 @@
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
+int ChangeMaxNumber();
 void MainMenu();
 void PlayMatch(int maxNumber);
 
@@ -11,6 +13,20 @@ int main(void) {
   MainMenu();
   
   return 0;
+}
+
+int ChangeMaxNumber(){
+  int input = -1;
+  
+  while ((input < 1) || (input > INT_MAX)){
+    printf("Enter the max number:\n");
+
+    scanf("%d", &input);
+  }
+
+  printf("Current max is now %d\n", input);
+
+  return input;
 }
 
 void MainMenu(){
@@ -35,6 +51,7 @@ void MainMenu(){
         PlayMatch(maxNumber);
         break;
       case 2:
+        maxNumber = ChangeMaxNumber();
         break;
       case 3:
         return;
